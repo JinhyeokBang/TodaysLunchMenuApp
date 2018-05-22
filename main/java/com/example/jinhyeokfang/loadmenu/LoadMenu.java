@@ -1,6 +1,7 @@
 package com.example.jinhyeokfang.loadmenu;
 
 import android.util.Log;
+import android.widget.EditText;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
@@ -16,11 +17,11 @@ public class LoadMenu extends StringRequest {
     static int date = currentTime.getDate();
 
 
-    final static private String URL = "https://today-menu-server.herokuapp.com/api/2/"+Integer.toString(month)+"/"+Integer.toString(date);
+    final static private String URL = "https://today-menu-server.herokuapp.com/api";
     private Map<String, String> parameters;
 
-    public LoadMenu(Response.Listener<String> listener) {
-        super(Method.GET, URL, listener, null);
+    public LoadMenu(Response.Listener<String> listener, int time) {
+        super(Method.GET, URL+'/'+time+'/'+Integer.toString(month)+"/"+Integer.toString(date), listener, null);
         parameters = new HashMap<String, String>();
     }
 

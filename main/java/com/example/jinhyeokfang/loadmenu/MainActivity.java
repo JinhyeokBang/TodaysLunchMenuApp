@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         final Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(mClickListener);
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            final EditText timeNumber = (EditText) findViewById(R.id.timeNumber);
+
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             };
-            LoadMenu loadMenu = new LoadMenu(responseListener);
+            LoadMenu loadMenu = new LoadMenu(responseListener,Integer.parseInt(timeNumber.getText().toString()));
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
             queue.add(loadMenu);
         }
