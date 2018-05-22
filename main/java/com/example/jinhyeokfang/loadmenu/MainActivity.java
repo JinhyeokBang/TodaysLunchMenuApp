@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final EditText timeNumber = (EditText) findViewById(R.id.timeNumber);
+            final Switch dinnerSwitch = (Switch) findViewById(R.id.setDinnerSwitch);
 
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             };
-            LoadMenu loadMenu = new LoadMenu(responseListener,Integer.parseInt(timeNumber.getText().toString()));
+            LoadMenu loadMenu = new LoadMenu(responseListener,dinnerSwitch.isChecked() ? 3 : 2);
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
             queue.add(loadMenu);
         }
